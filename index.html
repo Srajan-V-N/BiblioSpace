@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiblioSpace</title>
+
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary:     #00D5B9;
+  --primary-dk:  #00b8a0;
+  --text-dark:   #00110f;
+  --text-mid:    #4b5563;
+  --text-light:  #9ca3af;
+  --border:      #e5e7eb;
+  --bg:          #e7fffc;
+  --bg-subtle:   #f9fafb;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 15px;
+  color: var(--text-dark);
+  background: var(--bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3px;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.search-wrap {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-wrap input {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--bg-subtle);
+  outline: none;
+}
+
+.search-wrap input:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+.search-wrap input::placeholder {
+  color: var(--text-light);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-ghost {
+  display: inline-block;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  background: none;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 7px 16px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: var(--primary);
+}
+
+/* ============================================================
+   CATEGORY BAR
+   ============================================================ */
+.category-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.category-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 46px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-bar-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-item {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-mid);
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.cat-item:hover {
+  background: var(--bg-subtle);
+  color: var(--text-dark);
+}
+
+.cat-item.active {
+  background: #e6faf8;
+  color: var(--primary);
+  border-color: #b3ede8;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-btn-primary {
+  display: inline-block;
+  padding: 10px 26px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.hero-btn-ghost {
+  display: inline-block;
+  padding: 10px 26px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section {
+  padding: 44px 0;
+}
+
+.section-alt {
+  background: var(--bg-subtle);
+}
+
+.section-alt .card {
+  background: #fff;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.2px;
+}
+
+.section-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+/* ============================================================
+   BOOKS ROW
+   ============================================================ */
+.books-row {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.books-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.books-row::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card {
+  flex-shrink: 0;
+  width: 240px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: #c5cad2;
+}
+
+.card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border);
+}
+
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+
+.card-meta {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+.card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.card-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.card-price .rent-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-mid);
+  margin-right: 3px;
+}
+
+.wishlist-btn {
+  font-size: 16px;
+  color: var(--text-light);
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.wishlist-btn:hover {
+  color: #e5606e;
+}
+
+.card-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e6faf8;
+  color: var(--primary);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-btn {
+  display: block;
+  width: 100%;
+  padding: 7px 0;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card-btn-buy {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+}
+
+.card-btn-outline {
+  background: none;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: #1b1b1b;
+  border-top: none;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: var(--font-logo);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.2px;
+  margin-bottom: 8px;
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.footer-copy span {
+  color: var(--primary);
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+
+      <div class="logo">Biblio<span>Space</span></div>
+
+      <div class="search-wrap">
+        <input type="text" placeholder="Search books, PDFs, subjects...">
+      </div>
+
+      <div class="nav-actions">
+        <span class="btn-ghost">Log in</span>
+        <span class="btn-primary">Sign up free</span>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     CATEGORY BAR
+     ============================================================ -->
+<div class="category-bar">
+  <div class="container">
+    <div class="category-bar-inner">
+      <span class="cat-item active">All</span>
+      <span class="cat-item">Academics</span>
+      <span class="cat-item">Fiction</span>
+      <span class="cat-item">Non-Fiction</span>
+      <span class="cat-item">Competitive</span>
+      <span class="cat-item">Engineering</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <h1>All Books, PDFs &amp; Rentals in One Place</h1>
+  <p>Discover learning materials across every subject. Read, rent, or buy — on your terms.</p>
+  <div class="hero-actions">
+    <span class="hero-btn-primary">Browse Books</span>
+    <span class="hero-btn-ghost">Explore PDFs</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION: NEW RELEASES
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">New Releases</h2>
+      <span class="section-link">View all &rarr;</span>
+    </div>
+
+    <div class="books-row">
+
+      <!-- Data Structures — Buy -->
+      <div class="card">
+        <img class="card-img" src="DS.jpg" alt="Data Structures">
+        <div class="card-body">
+          <div class="card-title">Data Structures</div>
+          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-price">&#8377;200</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-buy">Buy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operating Systems — PDF -->
+      <div class="card">
+        <img class="card-img" src="OS.jpg" alt="Operating Systems">
+        <div class="card-body">
+          <div class="card-title">Operating Systems</div>
+          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-badge">PDF</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-outline">Read PDF</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DBMS — Rent -->
+      <div class="card">
+        <img class="card-img" src="DBMS.jpg" alt="DBMS">
+        <div class="card-body">
+          <div class="card-title">DBMS</div>
+          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-price"><span class="rent-tag">Rent</span>&#8377;50</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-outline">Rent</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engineering Maths — Buy -->
+      <div class="card">
+        <img class="card-img" src="EM.jpg" alt="Engineering Maths">
+        <div class="card-body">
+          <div class="card-title">Engineering Maths</div>
+          <div class="card-meta">Academic &middot; Mathematics</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-price">&#8377;300</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-buy">Buy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+          <img class="card-img" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTZGh-mFNBfkFgpf_PlMHj1YH_-24QyrARg5FmqE-9GKieE7XcaOuVEcdMB7MZISZpmJOsVFsKH-0mb6mxk0m5-qPkif_9tJd0DKiB-Pt9_W-B40s_D1B1Jjg&usqp=CAc" alt="Python Programming">
+          <div class="card-body">
+            <div class="card-title">Python Programming</div>
+            <div class="card-meta">Academic &middot; Programming</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <span class="card-price">&#8377;300</span>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-buy">Buy</span>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     SECTION: ACADEMIC BOOKS
+     ============================================================ -->
+<section class="section section-alt">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">Academic Books</h2>
+      <span class="section-link">View all &rarr;</span>
+    </div>
+
+    <div class="books-row">
+
+      <!-- Physics — PDF -->
+      <div class="card">
+        <img class="card-img" src="P.jpg" alt="Physics">
+        <div class="card-body">
+          <div class="card-title">Physics</div>
+          <div class="card-meta">Academic &middot; Science</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-badge">PDF</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-outline">Read PDF</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- C Programming — Buy -->
+      <div class="card">
+        <img class="card-img" src="C.jpg" alt="C Programming">
+        <div class="card-body">
+          <div class="card-title">C Programming</div>
+          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-price">&#8377;150</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-buy">Buy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DBMS — Rent -->
+      <div class="card">
+        <img class="card-img" src="DBMS.jpg" alt="DBMS">
+        <div class="card-body">
+          <div class="card-title">DBMS</div>
+          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-price"><span class="rent-tag">Rent</span>&#8377;50</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-outline">Rent</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Structures — Buy -->
+      <div class="card">
+        <img class="card-img" src="DS.jpg" alt="Data Structures">
+        <div class="card-body">
+          <div class="card-title">Data Structures</div>
+          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+          <div class="card-footer">
+            <div class="card-price-row">
+              <span class="card-price">&#8377;200</span>
+              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+            </div>
+            <span class="card-btn card-btn-buy">Buy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+          <img class="card-img" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTZGh-mFNBfkFgpf_PlMHj1YH_-24QyrARg5FmqE-9GKieE7XcaOuVEcdMB7MZISZpmJOsVFsKH-0mb6mxk0m5-qPkif_9tJd0DKiB-Pt9_W-B40s_D1B1Jjg&usqp=CAc" alt="Python Programming">
+          <div class="card-body">
+            <div class="card-title">Python Programming</div>
+            <div class="card-meta">Academic &middot; Programming</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <span class="card-price">&#8377;300</span>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-buy">Buy</span>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-brand">Biblio<span style="color:var(--primary)">Space</span></div>
+  <div class="footer-copy">&copy; 2026 <span>BiblioSpace</span>. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
