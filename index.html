@@ -16,15 +16,17 @@
 }
 
 :root {
-  --primary:     #00D5B9;
-  --primary-dk:  #00b8a0;
-  --text-dark:   #00110f;
-  --text-mid:    #4b5563;
-  --text-light:  #9ca3af;
-  --border:      #e5e7eb;
-  --bg:          #e7fffc;
-  --bg-subtle:   #f9fafb;
+  --primary:    #00D5B9;
+  --primary-dk: #00b8a0;
+  --text-dark:  #00110f;
+  --text-mid:   #4b5563;
+  --text-light: #9ca3af;
+  --border:     #d1e8e5;
+  --bg:         #e7fffc;
+  --bg-white:   #ffffff;
   --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-logo:  'Aero BC', 'Segoe UI', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
 }
 
 body {
@@ -47,7 +49,7 @@ img {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 3px;
+  padding: 0 24px;
 }
 
 /* ============================================================
@@ -57,24 +59,27 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #fff;
+  background: var(--bg-white);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0, 17, 15, 0.06);
 }
 
 .navbar-inner {
   display: flex;
   align-items: center;
   height: 64px;
-  gap: 20px;
+  gap: 12px;
 }
 
+/* Logo uses Aero BC */
 .logo {
-  font-size: 20px;
+  font-family: var(--font-logo);
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-dark);
-  letter-spacing: -0.4px;
   white-space: nowrap;
   flex-shrink: 0;
+  letter-spacing: 0.2px;
 }
 
 .logo span {
@@ -83,8 +88,9 @@ img {
 
 .search-wrap {
   flex: 1;
-  max-width: 500px;
+  max-width: 480px;
   margin: 0 auto;
+  position: relative;
 }
 
 .search-wrap input {
@@ -96,13 +102,13 @@ img {
   font-family: var(--font);
   font-size: 14px;
   color: var(--text-dark);
-  background: var(--bg-subtle);
+  background: var(--bg);
   outline: none;
 }
 
 .search-wrap input:focus {
   border-color: var(--primary);
-  background: #fff;
+  background: var(--bg-white);
 }
 
 .search-wrap input::placeholder {
@@ -118,7 +124,7 @@ img {
 
 .btn-ghost {
   display: inline-block;
-  padding: 7px 16px;
+  padding: 7px 18px;
   border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 13.5px;
@@ -126,86 +132,121 @@ img {
   color: var(--text-dark);
   cursor: pointer;
   background: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary);
+  background: var(--bg);
 }
 
 .btn-primary {
   display: inline-block;
-  padding: 7px 16px;
+  padding: 7px 18px;
   border: 1px solid var(--primary);
   border-radius: 6px;
   font-size: 13.5px;
   font-weight: 600;
-  color: #fff;
+  color: var(--bg-white);
   cursor: pointer;
   background: var(--primary);
+  transition: background 0.18s ease;
 }
 
-/* ============================================================
-   CATEGORY BAR
-   ============================================================ */
-.category-bar {
-  background: #fff;
-  border-bottom: 1px solid var(--border);
+.btn-primary:hover {
+  background: var(--primary-dk);
+  border-color: var(--primary-dk);
 }
 
-.category-bar-inner {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  height: 46px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.category-bar-inner::-webkit-scrollbar {
-  display: none;
-}
-
-.cat-item {
-  display: inline-block;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--text-mid);
-  white-space: nowrap;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.cat-item:hover {
-  background: var(--bg-subtle);
-  color: var(--text-dark);
-}
-
-.cat-item.active {
-  background: #e6faf8;
-  color: var(--primary);
-  border-color: #b3ede8;
-}
 
 /* ============================================================
    HERO
    ============================================================ */
 .hero {
-  background: var(--bg-subtle);
+  position: relative;
   border-bottom: 1px solid var(--border);
-  padding: 56px 24px;
   text-align: center;
+  overflow: hidden;
+  height: 290px;
+  background-color: #00D5B9;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
 .hero h1 {
-  font-size: 30px;
+  font-family: var(--font-serif);
+  font-size: 34px;
   font-weight: 700;
-  color: var(--text-dark);
-  letter-spacing: -0.5px;
-  margin-bottom: 10px;
+  color: #00110f;
+  letter-spacing: -0.3px;
+  margin-bottom: 12px;
 }
 
 .hero p {
-  font-size: 15px;
-  color: var(--text-mid);
-  margin-bottom: 24px;
+  font-family: var(--font-serif);
+  font-size: 15.5px;
+  font-style: italic;
+  color: #00110f;
+  margin-bottom: 28px;
+}
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 17, 15, 0.15);
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #00110f;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-tag:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 17, 15, 0.3);
+  cursor: pointer;
+}
+
+.hero-tag .fi {
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .hero-actions {
@@ -217,40 +258,62 @@ img {
 
 .hero-btn-primary {
   display: inline-block;
-  padding: 10px 26px;
+  padding: 11px 32px;
   background: var(--primary);
-  color: #fff;
+  color: #00110f;
   font-size: 14px;
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
+  border: 1px solid var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.hero-btn-primary:hover {
+  background: var(--primary-dk);
+  border-color: var(--primary-dk);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
 }
 
 .hero-btn-ghost {
   display: inline-block;
-  padding: 10px 26px;
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--text-dark);
+  padding: 11px 32px;
+  border: 1px solid rgba(0, 17, 15, 0.25);
+  background: rgba(255, 255, 255, 0.55);
+  color: #00110f;
   font-size: 14px;
   font-weight: 500;
   border-radius: 6px;
   cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.hero-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 17, 15, 0.4);
+  transform: translateY(-1px);
 }
 
 /* ============================================================
-   SECTIONS
+   MAIN
+   ============================================================ */
+.main {
+  padding: 0 0 56px;
+}
+
+/* ============================================================
+   SECTION
    ============================================================ */
 .section {
-  padding: 44px 0;
+  padding: 40px 0;
 }
 
-.section-alt {
-  background: var(--bg-subtle);
-}
-
-.section-alt .card {
-  background: #fff;
+.section + .section {
+  border-top: 1px solid var(--border);
 }
 
 .section-header {
@@ -261,7 +324,8 @@ img {
 }
 
 .section-title {
-  font-size: 17px;
+  font-family: var(--font-serif);
+  font-size: 19px;
   font-weight: 700;
   color: var(--text-dark);
   letter-spacing: -0.2px;
@@ -270,7 +334,7 @@ img {
 .section-link {
   font-size: 13px;
   font-weight: 500;
-  color: var(--primary);
+  color: var(--primary-dk);
   cursor: pointer;
 }
 
@@ -281,7 +345,7 @@ img {
   display: flex;
   gap: 40px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
@@ -300,25 +364,61 @@ img {
    ============================================================ */
 .card {
   flex-shrink: 0;
-  width: 240px;
-  background: var(--bg);
+  width: 220px;
+  background: var(--bg-white);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 17, 15, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
-  border-color: #c5cad2;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 17, 15, 0.12);
+  border-color: var(--primary);
+}
+
+.card-img-wrap {
+  position: relative;
 }
 
 .card-img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: contain;
   background: var(--bg-white);
   border-bottom: 1px solid var(--border);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.card-sale-flag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #e53e3e;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.card-new-flag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--primary-dk);
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
 .card-body {
@@ -329,17 +429,18 @@ img {
 }
 
 .card-title {
+  font-family: var(--font-serif);
   font-size: 13.5px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-dark);
   line-height: 1.4;
   margin-bottom: 3px;
 }
 
 .card-meta {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-light);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .card-footer {
@@ -353,77 +454,524 @@ img {
   margin-bottom: 10px;
 }
 
-.card-price {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-dark);
+.card-price-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 
-.card-price .rent-tag {
-  font-size: 11px;
+.card-price-original {
+  font-size: 11.5px;
+  color: var(--text-light);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.card-price-now {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00110f;
+  line-height: 1.2;
+}
+
+.card-price-now .rent-tag {
+  font-size: 10.5px;
   font-weight: 500;
   color: var(--text-mid);
-  margin-right: 3px;
+  margin-right: 2px;
+}
+
+.card-discount {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 1px 6px;
+  background: #fff1f0;
+  color: #c0392b;
+  border: 1px solid #ffc9c5;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .wishlist-btn {
-  font-size: 16px;
-  color: var(--text-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 17px;
+  color: var(--text-mid);
   cursor: pointer;
   line-height: 1;
-  padding: 2px 4px;
-  border-radius: 4px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
 .wishlist-btn:hover {
   color: #e5606e;
+  background: #fff0f2;
+  border-color: #ffc9d0;
 }
 
 .card-badge {
   display: inline-block;
   padding: 2px 8px;
-  background: #e6faf8;
-  color: var(--primary);
+  background: #d0f5f0;
+  color: var(--primary-dk);
+  border: 1px solid #a5e8e0;
   border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
-  margin-bottom: 10px;
 }
 
 .card-btn {
   display: block;
   width: 100%;
-  padding: 7px 0;
+  padding: 9px 0;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 7px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  letter-spacing: 0.1px;
+  transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+}
+
+.card-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 17, 15, 0.15);
 }
 
 .card-btn-buy {
   background: var(--primary);
-  color: #fff;
+  color: #00110f;
   border: 1px solid var(--primary);
 }
 
-.card-btn-outline {
-  background: none;
-  color: var(--primary);
-  border: 1px solid var(--primary);
+.card-btn-buy:hover {
+  background: var(--primary-dk);
+  border-color: var(--primary-dk);
+}
+
+.card-btn-rent {
+  background: #0d9488;
+  color: #ffffff;
+  border: 1px solid #0d9488;
+}
+
+.card-btn-rent:hover {
+  background: #0f766e;
+  border-color: #0f766e;
+}
+
+.card-btn-pdf {
+  background: #7c3aed;
+  color: #ffffff;
+  border: 1px solid #7c3aed;
+}
+
+.card-btn-pdf:hover {
+  background: #6d28d9;
+  border-color: #6d28d9;
 }
 
 /* ============================================================
-   DIVIDER
+   BROWSE LAYOUT — sidebar + books
    ============================================================ */
-.section-divider {
-  border: none;
+.browse-layout {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  padding: 32px 0 0;
+}
+
+.filter-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 120px;
+}
+
+.books-area {
+  flex: 1;
+  min-width: 0;
+}
+
+.books-area .section {
+  padding: 0 0 36px;
+}
+
+.books-area .section + .section {
   border-top: 1px solid var(--border);
-  margin: 0;
+  padding-top: 32px;
 }
 
 /* ============================================================
-   FOOTER
+   FILTER FORM
+   ============================================================ */
+.filter-form fieldset {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px 16px;
+  margin-bottom: 14px;
+  background: var(--bg-white);
+}
+
+.filter-form legend {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primary-dk);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 0 8px;
+}
+
+.filter-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+  font-size: 13.5px;
+  color: var(--text-mid);
+  cursor: pointer;
+}
+
+.filter-check-item input[type="checkbox"] {
+  accent-color: var(--primary);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.filter-price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.filter-price-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--primary);
+}
+
+.filter-price-row input[type="number"] {
+  width: 68px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--bg);
+  outline: none;
+}
+
+.filter-price-row input[type="number"]:focus {
+  border-color: var(--primary);
+}
+
+.filter-btn {
+  width: 100%;
+  padding: 9px 0;
+  background: var(--primary);
+  color: #00110f;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.filter-btn:hover {
+  background: var(--primary-dk);
+  border-color: var(--primary-dk);
+}
+
+/* ============================================================
+   SHARED FORM STYLES
+   ============================================================ */
+.form-section {
+  background: var(--bg-white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-grid-single {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  background: var(--bg-white);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-group input[type="file"] {
+  padding: 7px 10px;
+  border: 1px dashed var(--primary);
+  background: #f0fffe;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.form-group input[type="range"] {
+  accent-color: var(--primary);
+  width: 100%;
+  margin-top: 4px;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.radio-item,
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--text-mid);
+  cursor: pointer;
+}
+
+.radio-item input[type="radio"],
+.checkbox-item input[type="checkbox"] {
+  accent-color: var(--primary);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.form-fieldset {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 22px 22px;
+  margin-bottom: 20px;
+  background: var(--bg);
+}
+
+.form-fieldset legend {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary-dk);
+  padding: 0 10px;
+  letter-spacing: 0.1px;
+}
+
+.form-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.btn-form-submit {
+  padding: 10px 32px;
+  background: var(--primary);
+  color: #00110f;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.15s ease;
+}
+
+.btn-form-submit:hover {
+  background: var(--primary-dk);
+  border-color: var(--primary-dk);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   ORDER HISTORY TABLE
+   ============================================================ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table caption {
+  text-align: left;
+  font-size: 12.5px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+}
+
+.data-table thead tr {
+  background: #d0f5f0;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 11px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primary-dk);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  border: 1px solid #a5e8e0;
+}
+
+.data-table td {
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--bg);
+}
+
+.data-table tbody tr:hover {
+  background: #edfdf9;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.status-delivered {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status-active {
+  background: #d0f5f0;
+  color: var(--primary-dk);
+  border: 1px solid #a5e8e0;
+}
+
+.status-completed {
+  background: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+}
+
+.status-processing {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .browse-layout {
+    flex-direction: column;
+  }
+  .filter-sidebar {
+    width: 100%;
+    position: static;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .filter-sidebar form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .filter-form fieldset {
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-grid-single {
+    grid-column: 1;
+  }
+}
+
+/* ============================================================
+   FOOTER — dark
    ============================================================ */
 .site-footer {
   background: #1b1b1b;
@@ -451,6 +999,7 @@ img {
   font-weight: 600;
 }
 </style>
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 <body>
 
@@ -477,226 +1026,628 @@ img {
 </nav>
 
 <!-- ============================================================
-     CATEGORY BAR
-     ============================================================ -->
-<div class="category-bar">
-  <div class="container">
-    <div class="category-bar-inner">
-      <span class="cat-item active">All</span>
-      <span class="cat-item">Academics</span>
-      <span class="cat-item">Fiction</span>
-      <span class="cat-item">Non-Fiction</span>
-      <span class="cat-item">Competitive</span>
-      <span class="cat-item">Engineering</span>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
      HERO
      ============================================================ -->
 <section class="hero">
-  <h1>All Books, PDFs &amp; Rentals in One Place</h1>
-  <p>Discover learning materials across every subject. Read, rent, or buy — on your terms.</p>
-  <div class="hero-actions">
-    <span class="hero-btn-primary">Browse Books</span>
-    <span class="hero-btn-ghost">Explore PDFs</span>
+  <img class="hero-bg" src="Top.jpg" alt="">
+  <div class="hero-content">
+    <h1>All Books, PDFs &amp; Rentals in One Place</h1>
+    <p>Discover learning materials across every subject. Read, rent, or buy &mdash; on your terms.</p>
+    <div class="hero-tags">
+      <span class="hero-tag"><i class="fi fi-rr-book"></i> Buy Books</span>
+      <span class="hero-tag"><i class="fi fi-rr-document"></i> Read PDFs</span>
+      <span class="hero-tag"><i class="fi fi-rr-calendar"></i> Rent &amp; Return</span>
+      <span class="hero-tag"><i class="fi fi-rr-star"></i> Wishlist</span>
+    </div>
+    <div class="hero-actions">
+      <span class="hero-btn-primary">Browse Books</span>
+      <span class="hero-btn-ghost">Explore PDFs</span>
+    </div>
   </div>
 </section>
 
 <!-- ============================================================
-     SECTION: NEW RELEASES
+     MAIN CONTENT
      ============================================================ -->
-<section class="section">
+<main class="main">
+
+  <!-- BROWSE & FILTER LAYOUT -->
   <div class="container">
+    <div class="browse-layout">
 
-    <div class="section-header">
-      <h2 class="section-title">New Releases</h2>
-      <span class="section-link">View all &rarr;</span>
-    </div>
+      <!-- FILTER SIDEBAR -->
+      <aside class="filter-sidebar">
+        <form class="filter-form" method="get">
 
-    <div class="books-row">
+          <fieldset>
+            <legend>Categories</legend>
+            <label class="filter-check-item">
+              <input type="checkbox" name="cat" value="academics"> Academics
+            </label>
+            <label class="filter-check-item">
+              <input type="checkbox" name="cat" value="fiction"> Fiction
+            </label>
+            <label class="filter-check-item">
+              <input type="checkbox" name="cat" value="nonfiction"> Non-Fiction
+            </label>
+            <label class="filter-check-item">
+              <input type="checkbox" name="cat" value="competitive"> Competitive
+            </label>
+            <label class="filter-check-item">
+              <input type="checkbox" name="cat" value="engineering"> Engineering
+            </label>
+          </fieldset>
 
-      <!-- Data Structures — Buy -->
-      <div class="card">
-        <img class="card-img" src="DS.jpg" alt="Data Structures">
-        <div class="card-body">
-          <div class="card-title">Data Structures</div>
-          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-price">&#8377;200</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+          <fieldset>
+            <legend>Availability</legend>
+            <label class="filter-check-item">
+              <input type="checkbox" name="avail" value="buy" checked> Buy
+            </label>
+            <label class="filter-check-item">
+              <input type="checkbox" name="avail" value="rent" checked> Rent
+            </label>
+            <label class="filter-check-item">
+              <input type="checkbox" name="avail" value="pdf" checked> PDF
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Max Price (&#8377;)</legend>
+            <div class="filter-price-row">
+              <input type="range" name="max-price" min="0" max="1000" value="500">
+              <input type="number" name="max-price-val" min="0" max="1000" value="500">
             </div>
-            <span class="card-btn card-btn-buy">Buy</span>
-          </div>
-        </div>
+          </fieldset>
+
+          <button type="submit" class="filter-btn">Apply Filters</button>
+
+        </form>
+      </aside>
+
+      <!-- BOOKS AREA -->
+      <div class="books-area">
+
+  <!-- NEW RELEASES -->
+  <section class="section">
+
+      <div class="section-header">
+        <h2 class="section-title">New Releases</h2>
+        <span class="section-link">View all &rarr;</span>
       </div>
 
-      <!-- Operating Systems — PDF -->
-      <div class="card">
-        <img class="card-img" src="OS.jpg" alt="Operating Systems">
-        <div class="card-body">
-          <div class="card-title">Operating Systems</div>
-          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-badge">PDF</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+      <div class="books-row">
+
+        <!-- Data Structures — Buy -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="DS.jpg" alt="Data Structures">
+            <span class="card-sale-flag">SALE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Data Structures</div>
+            <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;350</span>
+                  <span class="card-price-now">&#8377;200</span>
+                  <span class="card-discount">43% OFF</span>
+                </div>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-buy">Buy Now</span>
             </div>
-            <span class="card-btn card-btn-outline">Read PDF</span>
           </div>
         </div>
-      </div>
 
-      <!-- DBMS — Rent -->
-      <div class="card">
-        <img class="card-img" src="DBMS.jpg" alt="DBMS">
-        <div class="card-body">
-          <div class="card-title">DBMS</div>
-          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-price"><span class="rent-tag">Rent</span>&#8377;50</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+        <!-- Operating Systems — PDF -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="OS.jpg" alt="Operating Systems">
+            <span class="card-new-flag">FREE PDF</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Operating Systems</div>
+            <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <span class="card-badge">PDF</span>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-pdf">Read PDF</span>
             </div>
-            <span class="card-btn card-btn-outline">Rent</span>
           </div>
         </div>
-      </div>
 
-      <!-- Engineering Maths — Buy -->
-      <div class="card">
-        <img class="card-img" src="EM.jpg" alt="Engineering Maths">
-        <div class="card-body">
-          <div class="card-title">Engineering Maths</div>
-          <div class="card-meta">Academic &middot; Mathematics</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-price">&#8377;300</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+        <!-- DBMS — Rent -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="DBMS.jpg" alt="DBMS">
+            <span class="card-sale-flag">SALE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">DBMS</div>
+            <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;80</span>
+                  <span class="card-price-now"><span class="rent-tag">Rent</span>&#8377;50</span>
+                  <span class="card-discount">37% OFF</span>
+                </div>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-rent">Rent Now</span>
             </div>
-            <span class="card-btn card-btn-buy">Buy</span>
           </div>
         </div>
-      </div>
 
-      <div class="card">
-          <img class="card-img" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTZGh-mFNBfkFgpf_PlMHj1YH_-24QyrARg5FmqE-9GKieE7XcaOuVEcdMB7MZISZpmJOsVFsKH-0mb6mxk0m5-qPkif_9tJd0DKiB-Pt9_W-B40s_D1B1Jjg&usqp=CAc" alt="Python Programming">
+        <!-- Engineering Maths — Buy -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="EM.jpg" alt="Engineering Maths">
+            <span class="card-sale-flag">SALE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Engineering Maths</div>
+            <div class="card-meta">Academic &middot; Mathematics</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;450</span>
+                  <span class="card-price-now">&#8377;300</span>
+                  <span class="card-discount">33% OFF</span>
+                </div>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-buy">Buy Now</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Python Programming — Buy -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTZGh-mFNBfkFgpf_PlMHj1YH_-24QyrARg5FmqE-9GKieE7XcaOuVEcdMB7MZISZpmJOsVFsKH-0mb6mxk0m5-qPkif_9tJd0DKiB-Pt9_W-B40s_D1B1Jjg&usqp=CAc" alt="Python Programming">
+            <span class="card-sale-flag">SALE</span>
+          </div>
           <div class="card-body">
             <div class="card-title">Python Programming</div>
             <div class="card-meta">Academic &middot; Programming</div>
             <div class="card-footer">
               <div class="card-price-row">
-                <span class="card-price">&#8377;300</span>
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;499</span>
+                  <span class="card-price-now">&#8377;300</span>
+                  <span class="card-discount">40% OFF</span>
+                </div>
                 <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
               </div>
-              <span class="card-btn card-btn-buy">Buy</span>
+              <span class="card-btn card-btn-buy">Buy Now</span>
             </div>
           </div>
         </div>
 
-    </div>
-  </div>
-</section>
+      </div>
+  </section>
 
-<hr class="section-divider">
+  <!-- ACADEMIC BOOKS -->
+  <section class="section">
 
-<!-- ============================================================
-     SECTION: ACADEMIC BOOKS
-     ============================================================ -->
-<section class="section section-alt">
-  <div class="container">
-
-    <div class="section-header">
-      <h2 class="section-title">Academic Books</h2>
-      <span class="section-link">View all &rarr;</span>
-    </div>
-
-    <div class="books-row">
-
-      <!-- Physics — PDF -->
-      <div class="card">
-        <img class="card-img" src="P.jpg" alt="Physics">
-        <div class="card-body">
-          <div class="card-title">Physics</div>
-          <div class="card-meta">Academic &middot; Science</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-badge">PDF</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
-            </div>
-            <span class="card-btn card-btn-outline">Read PDF</span>
-          </div>
-        </div>
+      <div class="section-header">
+        <h2 class="section-title">Academic Books</h2>
+        <span class="section-link">View all &rarr;</span>
       </div>
 
-      <!-- C Programming — Buy -->
-      <div class="card">
-        <img class="card-img" src="C.jpg" alt="C Programming">
-        <div class="card-body">
-          <div class="card-title">C Programming</div>
-          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-price">&#8377;150</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+      <div class="books-row">
+
+        <!-- Physics — PDF -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="P.jpg" alt="Physics">
+            <span class="card-new-flag">FREE PDF</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Physics</div>
+            <div class="card-meta">Academic &middot; Science</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <span class="card-badge">PDF</span>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-pdf">Read PDF</span>
             </div>
-            <span class="card-btn card-btn-buy">Buy</span>
           </div>
         </div>
-      </div>
 
-      <!-- DBMS — Rent -->
-      <div class="card">
-        <img class="card-img" src="DBMS.jpg" alt="DBMS">
-        <div class="card-body">
-          <div class="card-title">DBMS</div>
-          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-price"><span class="rent-tag">Rent</span>&#8377;50</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+        <!-- C Programming — Buy -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="C.jpg" alt="C Programming">
+            <span class="card-sale-flag">SALE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">C Programming</div>
+            <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;250</span>
+                  <span class="card-price-now">&#8377;150</span>
+                  <span class="card-discount">40% OFF</span>
+                </div>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-buy">Buy Now</span>
             </div>
-            <span class="card-btn card-btn-outline">Rent</span>
           </div>
         </div>
-      </div>
 
-      <!-- Data Structures — Buy -->
-      <div class="card">
-        <img class="card-img" src="DS.jpg" alt="Data Structures">
-        <div class="card-body">
-          <div class="card-title">Data Structures</div>
-          <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
-          <div class="card-footer">
-            <div class="card-price-row">
-              <span class="card-price">&#8377;200</span>
-              <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+        <!-- DBMS — Rent -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="DBMS.jpg" alt="DBMS">
+            <span class="card-sale-flag">SALE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">DBMS</div>
+            <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;80</span>
+                  <span class="card-price-now"><span class="rent-tag">Rent</span>&#8377;50</span>
+                  <span class="card-discount">37% OFF</span>
+                </div>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-rent">Rent Now</span>
             </div>
-            <span class="card-btn card-btn-buy">Buy</span>
           </div>
         </div>
-      </div>
 
-      <div class="card">
-          <img class="card-img" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTZGh-mFNBfkFgpf_PlMHj1YH_-24QyrARg5FmqE-9GKieE7XcaOuVEcdMB7MZISZpmJOsVFsKH-0mb6mxk0m5-qPkif_9tJd0DKiB-Pt9_W-B40s_D1B1Jjg&usqp=CAc" alt="Python Programming">
+        <!-- Data Structures — Buy -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="DS.jpg" alt="Data Structures">
+            <span class="card-sale-flag">SALE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Data Structures</div>
+            <div class="card-meta">Academic &middot; CS &amp; Engineering</div>
+            <div class="card-footer">
+              <div class="card-price-row">
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;350</span>
+                  <span class="card-price-now">&#8377;200</span>
+                  <span class="card-discount">43% OFF</span>
+                </div>
+                <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
+              </div>
+              <span class="card-btn card-btn-buy">Buy Now</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Python Programming — Buy -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img class="card-img" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTZGh-mFNBfkFgpf_PlMHj1YH_-24QyrARg5FmqE-9GKieE7XcaOuVEcdMB7MZISZpmJOsVFsKH-0mb6mxk0m5-qPkif_9tJd0DKiB-Pt9_W-B40s_D1B1Jjg&usqp=CAc" alt="Python Programming">
+            <span class="card-sale-flag">SALE</span>
+          </div>
           <div class="card-body">
             <div class="card-title">Python Programming</div>
             <div class="card-meta">Academic &middot; Programming</div>
             <div class="card-footer">
               <div class="card-price-row">
-                <span class="card-price">&#8377;300</span>
+                <div class="card-price-group">
+                  <span class="card-price-original">&#8377;499</span>
+                  <span class="card-price-now">&#8377;300</span>
+                  <span class="card-discount">40% OFF</span>
+                </div>
                 <span class="wishlist-btn" title="Add to wishlist">&#9825;</span>
               </div>
-              <span class="card-btn card-btn-buy">Buy</span>
+              <span class="card-btn card-btn-buy">Buy Now</span>
             </div>
           </div>
         </div>
 
+      </div>
+  </section>
+
+      </div><!-- /books-area -->
+    </div><!-- /browse-layout -->
+  </div><!-- /container -->
+
+  <!-- ============================================================
+       SELL YOUR BOOK
+       ============================================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Sell Your Book</h2>
+        <span class="section-link">How it works &rarr;</span>
+      </div>
+
+      <div class="form-section">
+        <form method="post">
+
+          <!-- Fieldset 1: Book Information -->
+          <fieldset class="form-fieldset">
+            <legend>Book Information</legend>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="sell-title">Book Name</label>
+                <input type="text" id="sell-title" name="book-name" placeholder="e.g. Data Structures &amp; Algorithms" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sell-author">Author</label>
+                <input type="text" id="sell-author" name="author" placeholder="e.g. Cormen, Rivest" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sell-category">Category</label>
+                <select id="sell-category" name="category" required>
+                  <option value="" disabled selected>Select a category</option>
+                  <optgroup label="Academic">
+                    <option value="cs-engineering">CS &amp; Engineering</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="programming">Programming</option>
+                  </optgroup>
+                  <optgroup label="General">
+                    <option value="fiction">Fiction</option>
+                    <option value="nonfiction">Non-Fiction</option>
+                    <option value="competitive">Competitive Exams</option>
+                    <option value="self-help">Self-Help</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="sell-url">External Book Link (URL)</label>
+                <input type="url" id="sell-url" name="book-url" placeholder="https://example.com/book-page">
+              </div>
+
+              <div class="form-group form-grid-single">
+                <label for="sell-desc">Description</label>
+                <textarea id="sell-desc" name="description" rows="4" placeholder="Briefly describe the book — edition, topics covered, condition notes..."></textarea>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- Fieldset 2: Condition & Pricing -->
+          <fieldset class="form-fieldset">
+            <legend>Condition &amp; Pricing</legend>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label>Book Condition</label>
+                <div class="radio-group">
+                  <label class="radio-item">
+                    <input type="radio" name="condition" value="new" checked> New
+                  </label>
+                  <label class="radio-item">
+                    <input type="radio" name="condition" value="used"> Used
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="sell-price">Selling Price (&#8377;)</label>
+                <input type="number" id="sell-price" name="price" min="1" max="10000" placeholder="e.g. 250">
+              </div>
+
+              <div class="form-group form-grid-single">
+                <label for="sell-rating">Condition Rating: <strong>5</strong> / 10</label>
+                <input type="range" id="sell-rating" name="rating" min="1" max="10" value="5">
+                <div class="range-labels"><span>1 — Poor</span><span>10 — Mint</span></div>
+              </div>
+
+              <div class="form-group form-grid-single">
+                <label class="checkbox-item" style="font-weight:600;font-size:13px;">
+                  <input type="checkbox" name="rent" value="yes">
+                  Also available for Rent
+                </label>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- Fieldset 3: Upload -->
+          <fieldset class="form-fieldset">
+            <legend>Upload</legend>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="sell-cover">Book Cover Image</label>
+                <input type="file" id="sell-cover" name="cover" accept="image/*">
+              </div>
+
+            </div>
+          </fieldset>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn-form-submit">List My Book</button>
+          </div>
+
+        </form>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- ============================================================
+       SIGN UP
+       ============================================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Create Your Account</h2>
+        <span class="section-link">Already have an account? Log in &rarr;</span>
+      </div>
+
+      <div class="form-section">
+        <form method="post">
+          <div class="form-grid">
+
+            <!-- Left column: Personal Information -->
+            <fieldset class="form-fieldset">
+              <legend>Personal Information</legend>
+
+              <div class="form-group">
+                <label for="su-name">Full Name</label>
+                <input type="text" id="su-name" name="name" placeholder="Your full name" required>
+              </div>
+
+              <div class="form-group" style="margin-top:14px;">
+                <label for="su-email">Email Address</label>
+                <input type="email" id="su-email" name="email" placeholder="you@example.com" required>
+              </div>
+
+              <div class="form-group" style="margin-top:14px;">
+                <label for="su-pass">Password</label>
+                <input type="password" id="su-pass" name="password" minlength="8" placeholder="Min. 8 characters" required>
+              </div>
+
+              <div class="form-group" style="margin-top:14px;">
+                <label for="su-dob">Date of Birth</label>
+                <input type="date" id="su-dob" name="dob" min="1950-01-01" max="2010-12-31">
+              </div>
+
+              <div class="form-group" style="margin-top:14px;">
+                <label for="su-time">Preferred Reading Time</label>
+                <input type="time" id="su-time" name="pref-time" value="20:00">
+              </div>
+
+            </fieldset>
+
+            <!-- Right column: Preferences -->
+            <fieldset class="form-fieldset">
+              <legend>Preferences</legend>
+
+              <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                  <label class="radio-item">
+                    <input type="radio" name="gender" value="male"> Male
+                  </label>
+                  <label class="radio-item">
+                    <input type="radio" name="gender" value="female"> Female
+                  </label>
+                  <label class="radio-item">
+                    <input type="radio" name="gender" value="other"> Other
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top:18px;">
+                <label>Reading Interests</label>
+                <div class="checkbox-group" style="flex-direction:column;gap:10px;margin-top:8px;">
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="interest" value="fiction"> Fiction &amp; Literature
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="interest" value="academics" checked> Academics &amp; Textbooks
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="interest" value="programming" checked> Programming &amp; Tech
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="interest" value="science"> Science &amp; Research
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="interest" value="history"> History &amp; Culture
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="interest" value="selfhelp"> Self-Help &amp; Growth
+                  </label>
+                </div>
+              </div>
+
+            </fieldset>
+
+          </div><!-- /form-grid -->
+
+          <div class="form-submit-row" style="margin-top:24px;">
+            <button type="submit" class="btn-form-submit">Create Account</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ORDER HISTORY TABLE
+       ============================================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Order History</h2>
+        <span class="section-link">Download report &rarr;</span>
+      </div>
+
+      <div class="form-section" style="padding:0;overflow:hidden;">
+        <table class="data-table">
+          <caption style="padding:16px 20px 0;font-size:13px;color:var(--text-light);text-align:left;">
+            Showing your last 5 transactions &mdash; updated 2026-04-10
+          </caption>
+          <thead>
+            <tr>
+              <th>Book Name</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data Structures</td>
+              <td><span class="type-badge">Buy</span></td>
+              <td>&#8377;200</td>
+              <td><time datetime="2026-03-15">15 Mar 2026</time></td>
+              <td><span class="status-badge status-delivered">Delivered</span></td>
+            </tr>
+            <tr>
+              <td>DBMS</td>
+              <td><span class="type-badge">Rent</span></td>
+              <td>&#8377;50</td>
+              <td><time datetime="2026-03-20">20 Mar 2026</time></td>
+              <td><span class="status-badge status-active">Active</span></td>
+            </tr>
+            <tr>
+              <td>Operating Systems</td>
+              <td><span class="type-badge">PDF</span></td>
+              <td>Free</td>
+              <td><time datetime="2026-02-10">10 Feb 2026</time></td>
+              <td><span class="status-badge status-completed">Completed</span></td>
+            </tr>
+            <tr>
+              <td>Engineering Maths</td>
+              <td><span class="type-badge">Buy</span></td>
+              <td>&#8377;300</td>
+              <td><time datetime="2026-04-01">01 Apr 2026</time></td>
+              <td><span class="status-badge status-processing">Processing</span></td>
+            </tr>
+            <tr>
+              <td>Python Programming</td>
+              <td><span class="type-badge">Buy</span></td>
+              <td>&#8377;300</td>
+              <td><time datetime="2026-04-08">08 Apr 2026</time></td>
+              <td><span class="status-badge status-delivered">Delivered</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+</main>
 
 <!-- ============================================================
      FOOTER
