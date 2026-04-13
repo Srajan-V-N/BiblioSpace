@@ -449,7 +449,7 @@ img {
 
 .card-price-row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -699,6 +699,9 @@ img {
   border-radius: 12px;
   border: 1px solid var(--border);
   padding: 32px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-grid {
@@ -809,7 +812,7 @@ img {
   border-radius: 8px;
   padding: 20px 22px 22px;
   margin-bottom: 20px;
-  background: var(--bg);
+  background: transparent;
 }
 
 .form-fieldset legend {
@@ -1491,85 +1494,82 @@ img {
 
       <div class="form-section">
         <form method="post">
-          <div class="form-grid">
 
-            <!-- Left column: Personal Information -->
-            <fieldset class="form-fieldset">
-              <legend>Personal Information</legend>
+          <!-- Personal Information -->
+          <fieldset class="form-fieldset">
+            <legend>Personal Information</legend>
 
-              <div class="form-group">
-                <label for="su-name">Full Name</label>
-                <input type="text" id="su-name" name="name" placeholder="Your full name" required>
+            <div class="form-group">
+              <label for="su-name">Full Name</label>
+              <input type="text" id="su-name" name="name" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group" style="margin-top:14px;">
+              <label for="su-email">Email Address</label>
+              <input type="email" id="su-email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group" style="margin-top:14px;">
+              <label for="su-pass">Password</label>
+              <input type="password" id="su-pass" name="password" minlength="8" placeholder="Min. 8 characters" required>
+            </div>
+
+            <div class="form-group" style="margin-top:14px;">
+              <label for="su-dob">Date of Birth</label>
+              <input type="date" id="su-dob" name="dob" min="1950-01-01" max="2010-12-31">
+            </div>
+
+            <div class="form-group" style="margin-top:14px;">
+              <label for="su-time">Preferred Reading Time</label>
+              <input type="time" id="su-time" name="pref-time" value="20:00">
+            </div>
+
+          </fieldset>
+
+          <!-- Preferences -->
+          <fieldset class="form-fieldset">
+            <legend>Preferences</legend>
+
+            <div class="form-group">
+              <label>Gender</label>
+              <div class="radio-group">
+                <label class="radio-item">
+                  <input type="radio" name="gender" value="male"> Male
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="gender" value="female"> Female
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="gender" value="other"> Other
+                </label>
               </div>
+            </div>
 
-              <div class="form-group" style="margin-top:14px;">
-                <label for="su-email">Email Address</label>
-                <input type="email" id="su-email" name="email" placeholder="you@example.com" required>
+            <div class="form-group" style="margin-top:18px;">
+              <label>Reading Interests</label>
+              <div class="checkbox-group" style="flex-direction:column;gap:10px;margin-top:8px;">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="fiction"> Fiction &amp; Literature
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="academics" checked> Academics &amp; Textbooks
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="programming" checked> Programming &amp; Tech
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="science"> Science &amp; Research
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="history"> History &amp; Culture
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="selfhelp"> Self-Help &amp; Growth
+                </label>
               </div>
+            </div>
 
-              <div class="form-group" style="margin-top:14px;">
-                <label for="su-pass">Password</label>
-                <input type="password" id="su-pass" name="password" minlength="8" placeholder="Min. 8 characters" required>
-              </div>
-
-              <div class="form-group" style="margin-top:14px;">
-                <label for="su-dob">Date of Birth</label>
-                <input type="date" id="su-dob" name="dob" min="1950-01-01" max="2010-12-31">
-              </div>
-
-              <div class="form-group" style="margin-top:14px;">
-                <label for="su-time">Preferred Reading Time</label>
-                <input type="time" id="su-time" name="pref-time" value="20:00">
-              </div>
-
-            </fieldset>
-
-            <!-- Right column: Preferences -->
-            <fieldset class="form-fieldset">
-              <legend>Preferences</legend>
-
-              <div class="form-group">
-                <label>Gender</label>
-                <div class="radio-group">
-                  <label class="radio-item">
-                    <input type="radio" name="gender" value="male"> Male
-                  </label>
-                  <label class="radio-item">
-                    <input type="radio" name="gender" value="female"> Female
-                  </label>
-                  <label class="radio-item">
-                    <input type="radio" name="gender" value="other"> Other
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-group" style="margin-top:18px;">
-                <label>Reading Interests</label>
-                <div class="checkbox-group" style="flex-direction:column;gap:10px;margin-top:8px;">
-                  <label class="checkbox-item">
-                    <input type="checkbox" name="interest" value="fiction"> Fiction &amp; Literature
-                  </label>
-                  <label class="checkbox-item">
-                    <input type="checkbox" name="interest" value="academics" checked> Academics &amp; Textbooks
-                  </label>
-                  <label class="checkbox-item">
-                    <input type="checkbox" name="interest" value="programming" checked> Programming &amp; Tech
-                  </label>
-                  <label class="checkbox-item">
-                    <input type="checkbox" name="interest" value="science"> Science &amp; Research
-                  </label>
-                  <label class="checkbox-item">
-                    <input type="checkbox" name="interest" value="history"> History &amp; Culture
-                  </label>
-                  <label class="checkbox-item">
-                    <input type="checkbox" name="interest" value="selfhelp"> Self-Help &amp; Growth
-                  </label>
-                </div>
-              </div>
-
-            </fieldset>
-
-          </div><!-- /form-grid -->
+          </fieldset>
 
           <div class="form-submit-row" style="margin-top:24px;">
             <button type="submit" class="btn-form-submit">Create Account</button>
